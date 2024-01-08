@@ -31,6 +31,11 @@ export default function Layout({ children }) {
       title: 'Create a Blog',
       icon: <CiFileOn />,
     },
+    {
+      href: '/admin/admin_category',
+      title: 'Create a category',
+      icon: <CiFileOn />,
+    },
   ];
 
   return (

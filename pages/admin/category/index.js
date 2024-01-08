@@ -1,6 +1,6 @@
 // pages/create_blog.js
 import React from 'react';
-import Sidenav from '../../components/sidenav';
+import Sidenav from '../../../components/sidenav';
 
 const CreateBlog = () => {
   return (

@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from 'react';
-import BlogContainer from '../components/BlogContainer'
-import BlogsInfo from '../public/BlogsInfo';
-import RecommendationList from '../components/RecommendationList';
-import Advertisement from '../components/Adverisement';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import BlogContainer from '../../components/BlogContainer'
+import BlogsInfo from '../../public/BlogsInfo';
+import RecommendationList from '../../components/RecommendationList';
+import Advertisement from '../../components/Adverisement';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 const Page = () => {
     const [selectedBlog, setSelectedBlog] = useState(BlogsInfo[0]);

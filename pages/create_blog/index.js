@@ -1,8 +1,8 @@
 // pages/create_blog.js
 import React from 'react';
-import BlogForm from '../components/BlogForm';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import BlogForm from '../../components/BlogForm';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 
 const CreateBlog = () => {

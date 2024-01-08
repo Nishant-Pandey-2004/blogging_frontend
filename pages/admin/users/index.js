@@ -7,7 +7,7 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import Pagination from "react-js-pagination";
 import Autosuggest from 'react-autosuggest';
 import Select from 'react-select';
-import Sidenav from '../../components/sidenav';
+import Sidenav from '../../../components/sidenav';
 
 const blogPosts = [
     {
