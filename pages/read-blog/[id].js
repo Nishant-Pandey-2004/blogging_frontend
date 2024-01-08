@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from 'react';
+import React from 'react';
 import BlogContainer from '../../components/BlogContainer'
 import BlogsInfo from '../../public/BlogsInfo';
 import RecommendationList from '../../components/RecommendationList';
@@ -13,8 +12,9 @@ const SingleBlog = ({data}) => {
 
     const handleBlogClick = (key) => {
         const blog = BlogsInfo.find(blog => blog.key === key);
-        setSelectedBlog(blog);
-        window.scrollTo(0, 0);
+        if (blog) {
+            router.push(`/read-blog/${blog.key}`);
+        }
     };
 
     return (
