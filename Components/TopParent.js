@@ -1,6 +1,4 @@
 import React from 'react'
-import TopChild from './TopChild';
-
 const TopParent = () => {
     const student = [{
         id:1,
