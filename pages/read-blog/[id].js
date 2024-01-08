@@ -7,7 +7,7 @@ import Advertisement from '../../components/Adverisement';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-const Page = () => {
+const SingleBlog = () => {
     const [selectedBlog, setSelectedBlog] = useState(BlogsInfo[0]);
 
     const handleBlogClick = (key) => {
@@ -45,4 +45,4 @@ const Page = () => {
     )
 }
 
-export default Page;
+export default SingleBlog;
