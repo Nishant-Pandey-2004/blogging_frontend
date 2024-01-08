@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/router';
-import Navbar from '@/components/Navbar';
-import BlogList from '@/components/BlogList';
+import BlogList from '../../../components/BlogList';
 
 const BlogViewList = () => {
   const router = useRouter();
