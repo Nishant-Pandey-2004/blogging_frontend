@@ -7,8 +7,9 @@ import Advertisement from '../../components/Adverisement';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-const SingleBlog = () => {
-    const [selectedBlog, setSelectedBlog] = useState(BlogsInfo[0]);
+const SingleBlog = ({data}) => {
+    console.log(data.response);
+    const [selectedBlog, setSelectedBlog] = useState(data.response);
 
     const handleBlogClick = (key) => {
         const blog = BlogsInfo.find(blog => blog.key === key);
@@ -21,15 +22,13 @@ const SingleBlog = () => {
             <Navbar />
 
             <div>
-                {selectedBlog && 
                     <BlogContainer
-                        key={selectedBlog.key}
-                        title={selectedBlog.title}
-                        author={selectedBlog.author}
-                        thumbnail={selectedBlog.thumbnailImageURL}
+                        key={data.id}
+                        title={data.title}
+                        author={data.title}
+                        thumbnail={data.front_image}
                         content={selectedBlog.content}
                     />
-                }
             </div>
 
             <div className="min-h-screen md:m-12 md:p-12">
@@ -46,3 +45,36 @@ const SingleBlog = () => {
 }
 
 export default SingleBlog;
+
+export async function getServerSideProps(context) {
+    let data = [];
+    const { req } = context;
+    const Cookie = req.headers.cookie;
+    const query = context.query;
+    const blogId = query.id; 
+    const apiUrl = `http://127.0.0.1:8000/api/fetchblog/${blogId}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            data = await response.json();
+        } else {
+            console.error(`Failed to fetch blog details. Status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Error during API call:', error);
+    }
+  
+    return {
+      props: {
+        data,
+      },
+    };
+  }
+  
