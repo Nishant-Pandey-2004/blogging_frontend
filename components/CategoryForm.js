@@ -1,5 +1,5 @@
 // components/CategoryForm.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TagsInput } from "react-tag-input-component";
 import ImageUpload from './ImageUpload';
 import styles from './BlogForm.module.css';
@@ -15,6 +15,8 @@ const categories = [
 const allSubcategories = categories.flatMap(category => category.subcategories);
 
 const CatForm = () => {
+  
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [subName, setsubName] = useState('');
@@ -26,11 +28,51 @@ const CatForm = () => {
   const [image, setImage] = useState(null);
   const [selected, setSelected] = useState([]);
  
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/getAll-categories")
+      .then((response) => response.json())
+      .then((data) => { 
+        setCategories(data.response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching Category:", error);
+      });
+  }, []);
   const handleImageChange = (selectedImage) => {
     setImage(selectedImage);
   };
-  const handleSubmit = () => {
-    // Check if the entered subcategory already exists in the predefined categories
+  const handleSubmit =async () => {
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/add-new-categories",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: subName,
+            description: description,
+            cover_image:
+              "http://res.cloudinary.com/chat-app-08/image/upload/v1704604419/ieotoclvve2qw61vl4xo.png",
+            front_image:
+              "http://res.cloudinary.com/chat-app-08/image/upload/v1704604419/ieotoclvve2qw61vl4xo.png",
+            tags: tags,
+            parent_id: selectedCategory,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("New Category Added Successfully!");
+      } else {
+        console.log("Error Category product. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error Category product:", error);
+      console.log("Error Category product. Please try again.");
+    } finally {
+    }    // Check if the entered subcategory already exists in the predefined categories
 
     if (allSubcategories.includes(selectedSubcategory)) {
       // Show an alert if subcategory already exists
@@ -92,8 +134,8 @@ const CatForm = () => {
               >
                 <option value="" disabled>----------------------------SELECT--------------------------------</option>
                 {categories.map((cat) => (
-                  <option key={cat.name} value={cat.name}>
-                    {cat.name}
+                  <option key={cat.title} value={cat.id}>
+                    {cat.title}
                   </option>
                 ))}
               </select>
