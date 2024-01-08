@@ -27,12 +27,12 @@ export default function Layout({ children }) {
       icon: <BsCardList />,
     },
     {
-      href: '/admin/create_blog',
+      href: '/admin/create-blog',
       title: 'Create a Blog',
       icon: <CiFileOn />,
     },
     {
-      href: '/admin/admin_category',
+      href: '/admin/create-category',
       title: 'Create a category',
       icon: <CiFileOn />,
     },
