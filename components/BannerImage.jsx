@@ -6,7 +6,7 @@ function BannerImage() {
             <img
                 className="w-full h-64 sm:h-48 md:h-48 object-cover rounded-lg"
                 alt="Banner Image"
-                src="./images/banner.png"
+                src="/images/banner.png"
             />
         </div>
     );

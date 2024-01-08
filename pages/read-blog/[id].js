@@ -1,19 +1,34 @@
-"use client";
-import React, { useState } from 'react';
+import React from 'react';
 import BlogContainer from '../../components/BlogContainer'
 import BlogsInfo from '../../public/BlogsInfo';
 import RecommendationList from '../../components/RecommendationList';
 import Advertisement from '../../components/Adverisement';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { useRouter } from 'next/router';
 
-const Page = () => {
-    const [selectedBlog, setSelectedBlog] = useState(BlogsInfo[0]);
+export async function getStaticPaths() {
+  const paths = BlogsInfo.map((blog, index) => ({
+    params: { id: (index + 1).toString() },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
+  const selectedBlog = BlogsInfo[params.id - 1]
+
+  return { props: { selectedBlog } }
+}
+
+const Page = ({ selectedBlog }) => {
+    const router = useRouter()
 
     const handleBlogClick = (key) => {
         const blog = BlogsInfo.find(blog => blog.key === key);
-        setSelectedBlog(blog);
-        window.scrollTo(0, 0);
+        if (blog) {
+            router.push(`/read-blog/${blog.key}`);
+        }
     };
 
     return (
