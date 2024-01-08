@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BlogContainer from '../../components/BlogContainer'
 import BlogsInfo from '../../public/BlogsInfo';
 import RecommendationList from '../../components/RecommendationList';
@@ -9,6 +9,9 @@ import Footer from '../../components/Footer';
 const SingleBlog = ({data}) => {
     console.log(data.response.title);
     const [selectedBlog, setSelectedBlog] = useState(data.response);
+
+
+    
 
     const handleBlogClick = (key) => {
         const blog = BlogsInfo.find(blog => blog.key === key);
