@@ -1,5 +1,5 @@
 import React from 'react';
-import HomePage from './HomePage';
+
 import Image from 'next/image';
 import { useState } from 'react';
 import {BsChevronCompactLeft,BsChevronCompactRight} from 'react-icons/bs'
