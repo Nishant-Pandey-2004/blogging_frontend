@@ -1,4 +1,5 @@
 
+#### Note for devs: Don't add Complete project folders instead git clone this project and then add your components in 📂components and pages frontend file in 📂pages.
 
 ## Getting Started
 
