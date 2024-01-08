@@ -8,7 +8,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
 const SingleBlog = ({data}) => {
-    console.log(data.response);
+    console.log(data.response.title);
     const [selectedBlog, setSelectedBlog] = useState(data.response);
 
     const handleBlogClick = (key) => {
@@ -22,12 +22,7 @@ const SingleBlog = ({data}) => {
             <Navbar />
 
             <div>
-                    <BlogContainer
-                        key={data.id}
-                        title={data.title}
-                        author={data.title}
-                        thumbnail={data.front_image}
-                        content={selectedBlog.content}
+                    <BlogContainer data={data.response}
                     />
             </div>
 

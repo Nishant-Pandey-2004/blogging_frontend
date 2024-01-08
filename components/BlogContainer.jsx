@@ -4,7 +4,8 @@ import ProfileImage from "./ProfileImage";
 import ActionButtons from "./ActionButtons";
 import Thumbnail from "./Thumbnail";
 
-const BlogContainer = (props) => {
+const BlogContainer = ({data}) => {
+  console.log(data.title);
   return (
     <div className="flex justify-center items-center min-h-screen md:m-12 md:p-12">
       <div className="m-8">
@@ -20,18 +21,20 @@ const BlogContainer = (props) => {
         <div className="p-4 bg-white rounded-lg shadow-md mt-16">
           <div className="mb-4">
             <div className="text-6xl font-bold text-gray-800">
-              {props.title}
+              {data.title}
             </div>
             <div className="mt-2">
               <div className="text-3xl font-bold text-[#344054]">
-                By {props.author}
+                {/* By {props.author} */}
+                By Shrikrushna Patil
               </div>
             </div>
 
             <div>
               {/* Using Thumbnail Component */}
               <Thumbnail
-                thumbnail={props.thumbnail}
+
+                thumbnail={data.cover_image}
               />
 
               {/* Using Action Buttons Component for Like, Sharee and Save*/}
@@ -40,12 +43,15 @@ const BlogContainer = (props) => {
           </div>
 
           <div className="text-xl font-semibold leading-relaxed">
+          <p className="mb-4">
+                {data.description}
+              </p>
             {/* Dynamically loading content using props and map function  from BlogsInfo.js*/}
-            {props.content.map((paragraph, index) => (
+            {/* {props.content.map((paragraph, index) => (
               <p key={index} className="mb-4">
                 {paragraph}
               </p>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
