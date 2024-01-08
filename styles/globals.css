@@ -1,0 +1,45 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination .page-item {
+  margin: 0 3px;
+}
+
+.pagination .page-link {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: blue;
+  color: #fff;
+  border-color: blue;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #ddd;
+  pointer-events: none;
+}
+
+.pagination .page-link:hover {
+  background-color: #e9ecef;
+}
+
+
+
+  
+  
