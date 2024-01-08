@@ -1,5 +1,4 @@
 import React from "react";
-import BannerImag from "../public/images/banner.png"
 
 function BannerImage() {
     return (
@@ -7,9 +6,7 @@ function BannerImage() {
             <img
                 className="w-full h-64 sm:h-48 md:h-48 object-cover rounded-lg"
                 alt="Banner Image"
-                src={BannerImag}
-                width={30}
-                height={30}
+                src="/images/banner.png"
             />
         </div>
     );
