@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "category": "Sports",
+    "bannerImage": "/banner.png",
+    "categoryInfo": "Sports encompass a diverse array of physical activities, ranging from team sports like soccer and basketball to individual pursuits such as tennis and swimming. Defined by rules and regulations, sports are characterized by a competitive spirit, with athletes or teams vying for victory. The organized nature of sports includes events at local, national, and international levels, like the Olympics or the World Cup. Participation in sports promotes physical fitness, fosters sportsmanship, and offers various health benefits. The global popularity of sports transcends cultural and geographical boundaries, drawing millions of enthusiasts and spectators. Whether played for recreation or at a professional level, sports contribute to community bonding, entertainment, and personal development, making them a significant and integral part of societies worldwide.",
+    "childCategories": [
+      {
+        "id": 101,
+        "category": "Cricket",
+        "bannerImage": "/banner.png",
+        "categoryInfo": "Cricket, a sport originating in England, has grown into a global phenomenon with a passionate following. Played in various formats and governed by rules, cricket embodies a competitive spirit seen in events like the ICC Cricket World Cup and T20 World Cup. It promotes physical fitness, teamwork, and strategic thinking, contributing to its popularity worldwide. From legendary players to iconic moments, cricket holds a special place in cultures, fostering a sense of community and national pride. Whether enjoyed casually or at the professional level, cricket's enduring appeal lies in its ability to unite diverse audiences across borders, making it an integral part of societies globally.",
+        "blogs": [
+          {
+            "id": 1011,
+            "thumbnail": "/Thumbnail.jpg",
+            "title": "India's embaracing performance against South Africa in the First Test",
+            "date": "2024-01-01",
+            "author": "John Doe"
+          }
+        ]
+      },
+      {
+        "id": 102,
+        "category": "Football",
+        "bannerImage": "/banner.png",
+        "categoryInfo": "Football, known as soccer in some regions, stands as the world's most popular sport, captivating millions with its dynamic and exhilarating gameplay. Governed by a set of rules, football is played globally at various levels, from local leagues to prestigious tournaments like the FIFA World Cup. The sport fosters teamwork, physical fitness, and strategic thinking, emphasizing skillful ball control and goal-scoring prowess. Its universal appeal transcends cultural differences, uniting people in their shared enthusiasm. Whether played in the neighborhood streets or watched in grand stadiums, football brings communities together, creating lasting memories and promoting a sense of belonging on a global scale.",
+        "blogs": [
+          {
+            "id": 1021,
+            "thumbnail": "/Thumbnail.jpg",
+            "title": "Premier League yearender: Manchester City dominate, Liverpool re-emerge",
+            "date": "2024-01-01",
+            "author": "John Doe"
+          }
+        ]
+      }
+    ],
+    "blogs": [
+      {
+        "id": 11,
+        "thumbnail": "/Thumbnail.jpg",
+        "title": "India's achievements in sports in 2023",
+        "date": "2024-01-01",
+        "author": "John Doe"
+      },
+      {
+        "id": 12,
+        "thumbnail": "/Thumbnail.jpg",
+        "title": "Year End Sports Wrap",
+        "date": "2024-01-01",
+        "author": "John Doe"
+      }
+    ]
+  }
+]
