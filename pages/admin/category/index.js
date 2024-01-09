@@ -29,6 +29,29 @@ export default function Layout() {
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 5;
 
+  const handleSubmit = async (id) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/delete-Category/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        console.log("Category Delete Successfully!");
+      } else {
+        console.log("Error Category. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error Category :", error);
+      console.log("Error Category . Please try again.");
+    } finally {
+    }
+  };
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/getAll-categories")
       .then((response) => response.json())
@@ -156,7 +179,7 @@ export default function Layout() {
                       <FaEdit />
                     </button>
                     <button className=" text-red-600 px-2 py-1">
-                      <MdOutlineDeleteForever />
+                      <MdOutlineDeleteForever onClick={()=>handleSubmit(id)}/>
                     </button>
                   </td>
                 </tr>

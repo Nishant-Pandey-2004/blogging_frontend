@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaSearch } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
@@ -87,11 +87,48 @@ const categoryOptions = [
 ];
 
 export default function Layout() {
+  const [blogs, setBlogs] = useState('');
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [filteredBlogPosts, setFilteredBlogPosts] = useState(blogPosts);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/getAll-blogs")
+      .then((response) => response.json())
+      .then((data) => { 
+        setBlogs(data.response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching Category:", error);
+      });
+  }, []);
+
+ 
+  const handleSubmit = async (id) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/delete-Blog/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        console.log("Blog Delete Successfully!");
+      } else {
+        console.log("Error Blog. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error Blog :", error);
+      console.log("Error Blog . Please try again.");
+    } finally {
+    }
+  };
 
   const [activePage, setActivePage] = useState(1);
   const itemsPerPage = 5;
@@ -219,15 +256,17 @@ export default function Layout() {
                 <th className='p-2 text-center'>Actions</th>
               </tr>
             </thead>
+            {
+              blogs&&(
             <tbody>
-              {paginatedBlogPosts.map(({ id, created_by, title, category, createdAt, updatedAt }) => (
+              {blogs.map(({ id, created_by, title, catogory_name, created_at, updated_at }) => (
                 <tr key={id} className='border-t'>
                   <td className='p-2 text-center'>{id}</td>
-                  <td className='p-2 text-center'>{category}</td>
+                  <td className='p-2 text-center'>{catogory_name}</td>
                   <td className='p-2 text-center'>{title}</td>
                   <td className='p-2 text-center'>{created_by}</td>
-                  <td className='p-2 text-center'>{createdAt}</td>
-                  <td className='p-2 text-center'>{updatedAt}</td>
+                  <td className='p-2 text-center'>{created_at}</td>
+                  <td className='p-2 text-center'>{updated_at}</td>
                   <td className='p-2 text-center'>
                   <button className= "text-green-600 px-2 py-1  justify">
                   <FaEye />
@@ -235,13 +274,15 @@ export default function Layout() {
                     <button className= "text-blue-600 px-2 py-1  justify">
                     <FaEdit />
                     </button>
-                    <button className=" text-red-600 px-2 py-1">
+                    <button className=" text-red-600 px-2 py-1" onClick={()=>handleSubmit(id)}>
                     <MdOutlineDeleteForever />
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
+              )
+            }
           </table>
 
           {/* Pagination */}
