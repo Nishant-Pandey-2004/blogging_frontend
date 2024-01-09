@@ -1,5 +1,7 @@
 import React from 'react'
-import Home from '../components/Home.js';
+import Home from '../../components/Home.js';
+
+
 const index = () => {
   return (
     <>
@@ -8,4 +10,4 @@ const index = () => {
   )
 }
 
-export default index
+export default index;
