@@ -4,38 +4,46 @@ import { IoMdAddCircle } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { MdOutlineDeleteForever } from "react-icons/md";
-import Pagination from "react-js-pagination";
 import Autosuggest from 'react-autosuggest';
 import Select from 'react-select';
 import Sidenav from '../../../components/sidenav';
+import Pagination from "react-js-pagination";
 
 const blogPosts = [
-    {
-      id: 1,
-      created_by: "Nishant",
-      title: "New Marvel Movie",
-      createdAt: "2024-01-14",
-      updatedAt: "2024-01-20",
-      category: "Entertainment",
-    },
-    {
-      id: 2,
-      created_by: "Karan",
-      title: "Best Places to visit in India",
-      createdAt: "2024-01-12",
-      updatedAt: "2024-01-12",
-      category: "Travel",
-    },
-    {
-      id: 3,
-      created_by: "Omkar",
-      title: "FIFA World Cup 2022",
-      createdAt: "2024-01-01",
-      updatedAt: "2024-01-02",
-      category: "Sports",
-    },
-    {
-      id: 4,
+  {
+    id: 1,
+    created_by: "Nishant",
+    title: "New Marvel Movie",
+    createdAt: "2024-01-14",
+    updatedAt: "2024-01-20",
+    category: "Entertainment",
+  },
+  {
+    id: 2,
+    created_by: "Karan",
+    title: "Best Places to visit in India",
+    createdAt: "2024-01-12",
+    updatedAt: "2024-01-12",
+    category: "Travel",
+  },
+  {
+    id: 3,
+    created_by: "Omkar",
+    title: "FIFA World Cup 2022",
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-02",
+    category: "Sports",
+  },
+  {
+    id: 4,
+    created_by: "Shaivi",
+    title: "Rare Snow Leopard",
+    createdAt: "2024-01-01",
+    updatedAt: "2024-01-01",
+    category: "Wildlife",
+  },
+  {
+      id: 5,
       created_by: "Shaivi",
       title: "Rare Snow Leopard",
       createdAt: "2024-01-01",
@@ -43,40 +51,32 @@ const blogPosts = [
       category: "Wildlife",
     },
     {
-        id: 5,
-        created_by: "Shaivi",
-        title: "Rare Snow Leopard",
-        createdAt: "2024-01-01",
-        updatedAt: "2024-01-01",
-        category: "Wildlife",
-      },
-      {
-        id: 6,
-        created_by: "Shaivi",
-        title: "Rare Snow Leopard",
-        createdAt: "2024-01-01",
-        updatedAt: "2024-01-01",
-        category: "Wildlife",
-      },
-      {
-        id: 7,
-        created_by: "Shaivi",
-        title: "Rare Snow Leopard",
-        createdAt: "2024-01-01",
-        updatedAt: "2024-01-01",
-        category: "Wildlife",
-      },
-      {
-        id: 8,
-        created_by: "Shaivi",
-        title: "Rare Snow Leopard",
-        createdAt: "2024-01-01",
-        updatedAt: "2024-01-01",
-        category: "Wildlife",
-      },
-    
-    // ... other blog post objects
-  ];
+      id: 6,
+      created_by: "Shaivi",
+      title: "Rare Snow Leopard",
+      createdAt: "2024-01-01",
+      updatedAt: "2024-01-01",
+      category: "Wildlife",
+    },
+    {
+      id: 7,
+      created_by: "Shaivi",
+      title: "Rare Snow Leopard",
+      createdAt: "2024-01-01",
+      updatedAt: "2024-01-01",
+      category: "Wildlife",
+    },
+    {
+      id: 8,
+      created_by: "Shaivi",
+      title: "Rare Snow Leopard",
+      createdAt: "2024-01-01",
+      updatedAt: "2024-01-01",
+      category: "Wildlife",
+    },
+  
+  // ... other blog post objects
+];
 
 const categoryOptions = [
   { value: 'Entertainment', label: 'Entertainment' },
@@ -183,7 +183,6 @@ export default function Layout() {
     const newFilteredBlogPosts = blogPosts.filter(filterFunction);
 
     setFilteredBlogPosts(newFilteredBlogPosts);
-    setActivePage(1);
     setSuggestions([]);
     setValue('');
     setSelectedSuggestion(null);
@@ -196,16 +195,16 @@ export default function Layout() {
           {/* Search bars */}
           <div className='flex '>
             <div>
-            <Select
-              options={categoryOptions}
-              isClearable
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              placeholder="All Categories"
-              className="rounded-md w-56 border border-black"
-            />
+              <Select
+                options={categoryOptions}
+                isClearable
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                placeholder="All Categories"
+                className="rounded-md w-56 border border-black"
+              />
             </div>
-            
+
             <Autosuggest
               suggestions={suggestions}
               onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -220,27 +219,21 @@ export default function Layout() {
               }}
               onSuggestionSelected={(_, { suggestion }) => setSelectedSuggestion(suggestion)}
             />
+
             <div>
-            <button onClick={handleSearchInTable} className="bg-orange-500 text-white px-4 py-2 rounded border border-black h-11">
-              <FaSearch />
-            </button>
+              <button onClick={handleSearchInTable} className="bg-orange-500 text-white px-4 py-2 rounded border border-black h-11">
+                <FaSearch />
+              </button>
             </div>
-            <div className="  text-black px-2 py-1 mt-4 flex justify-end w-full">
 
-    
-    <button className="ml-2 bg-stone-300 rounded-3xl p-2 h-11">
-        <div className="flex">
-        <IoMdAddCircle style={{ color: 'orange', fontSize: '2em' }} className="" />
-        <h4>Add New User</h4></div></button>
-        
-        
-
-
-
-  
-</div>
-
-            
+            <div className="text-black px-2 py-1 mt-4 flex justify-end w-full">
+              <button className="ml-2 bg-stone-300 rounded-3xl p-2 h-11">
+                <div className="flex">
+                  <IoMdAddCircle style={{ color: 'orange', fontSize: '2em' }} className="" />
+                  <h4>Add New User</h4>
+                </div>
+              </button>
+            </div>
           </div>
 
           {/* Display a table for blog posts */}
@@ -268,11 +261,11 @@ export default function Layout() {
                   <td className='p-2 text-center'>{created_at}</td>
                   <td className='p-2 text-center'>{updated_at}</td>
                   <td className='p-2 text-center'>
-                  <button className= "text-green-600 px-2 py-1  justify">
-                  <FaEye />
+                    <button className="text-green-600 px-2 py-1 justify">
+                      <FaEye />
                     </button>
-                    <button className= "text-blue-600 px-2 py-1  justify">
-                    <FaEdit />
+                    <button className="text-blue-600 px-2 py-1 justify">
+                      <FaEdit />
                     </button>
                     <button className=" text-red-600 px-2 py-1" onClick={()=>handleSubmit(id)}>
                     <MdOutlineDeleteForever />
@@ -284,21 +277,11 @@ export default function Layout() {
               )
             }
           </table>
-
-          {/* Pagination */}
-          <div className="flex justify-center mt-4">
-            <ul className="pagination">
-              <Pagination
-                activePage={activePage}
-                itemsCountPerPage={itemsPerPage}
-                totalItemsCount={filteredBlogPosts.length}
-                pageRangeDisplayed={5}
-                onChange={handlePageChange}
+          <Pagination
                 itemClass="page-item"
                 linkClass="page-link"
+                
               />
-            </ul>
-          </div>
         </div>
       </Sidenav>
     </>

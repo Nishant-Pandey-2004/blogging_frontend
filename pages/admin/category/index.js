@@ -1,13 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaSearch } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { MdOutlineDeleteForever } from "react-icons/md";
-import Pagination from "react-js-pagination";
 import Autosuggest from 'react-autosuggest';
 import Select from 'react-select';
 import Sidenav from '../../../components/sidenav';
+import Pagination from "react-js-pagination";
+
+const catPosts = [
+  { id: 1, parent_id: 1002, category_name: "Entertainment", createdAt: "2024-01-03", updatedAt: "2024-01-04", slug: "entertainment-1" },
+  { id: 2, parent_id: 1003, category_name: "Travel", createdAt: "2024-01-05", updatedAt: "2024-01-06", slug: "travel-2" },
+  { id: 3, parent_id: 1004, category_name: "Sports", createdAt: "2024-01-07", updatedAt: "2024-01-08", slug: "sports-3" },
+  { id: 4, parent_id: 1005, category_name: "Wildlife", createdAt: "2024-01-09", updatedAt: "2024-01-10", slug: "wildlife-4" },
+  { id: 5, parent_id: 1006, category_name: "Entertainment", createdAt: "2024-01-11", updatedAt: "2024-01-12", slug: "entertainment-5" },
+  { id: 6, parent_id: 1007, category_name: "Travel", createdAt: "2024-01-13", updatedAt: "2024-01-14", slug: "travel-6" },
+  { id: 7, parent_id: 1008, category_name: "Sports", createdAt: "2024-01-15", updatedAt: "2024-01-16", slug: "sports-7" },
+  { id: 8, parent_id: 1009, category_name: "Wildlife", createdAt: "2024-01-17", updatedAt: "2024-01-18", slug: "wildlife-8" },
+  { id: 9, parent_id: 1010, category_name: "Entertainment", createdAt: "2024-01-19", updatedAt: "2024-01-20", slug: "entertainment-9" },
+  { id: 10, parent_id: 1011, category_name: "Travel", createdAt: "2024-01-21", updatedAt: "2024-01-22", slug: "travel-10" }
+  // ... other cat posts
+];
 
 const categoryOptions = [
   { value: 'Entertainment', label: 'Entertainment' },
@@ -19,8 +33,6 @@ const categoryOptions = [
 
 export default function Layout() {
   const [value, setValue] = useState('');
-  const [catPosts, setCatPosts] = useState('');
-
   const [suggestions, setSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -110,7 +122,6 @@ export default function Layout() {
     const newFilteredBlogPosts = catPosts.filter(filterFunction);
 
     setFilteredBlogPosts(newFilteredBlogPosts);
-    setActivePage(1);
     setSuggestions([]);
     setValue('');
     setSelectedSuggestion(null);
@@ -137,7 +148,6 @@ export default function Layout() {
               <FaSearch />
             </button>
 
-
             <div className="  text-black px-2 py-1 mt-4 flex justify-end w-full">
               <button className="ml-2 bg-stone-300 rounded-3xl p-2 h-11">
                 <div className="flex">
@@ -155,22 +165,19 @@ export default function Layout() {
                 <th className='p-2 text-center'>Sr.No.</th>
                 <th className='p-2 text-center'>Category Name</th>
                 <th className='p-2 text-center'>Slug Link</th>
-                
                 <th className='p-2 text-center'>Created At</th>
                 <th className='p-2 text-center'>Updated At</th>
                 <th className='p-2 text-center'>Actions</th>
               </tr>
             </thead>
-            {
-              catPosts&&(
             <tbody>
-              {catPosts?.map(({ id, parent_id, title, created_at, updated_at, link_name }) => (
+              {filteredBlogPosts.map(({ id, parent_id, category_name, createdAt, updatedAt, slug }) => (
                 <tr key={id} className='border-t'>
                   <td className='p-2 text-center'>{id}</td>
-                  <td className='p-2 text-center'>{title}</td>
-                  <td className='p-2 text-center'>{title}</td>
-                  <td className='p-2 text-center'>{created_at}</td>
-                  <td className='p-2 text-center'>{updated_at}</td>
+                  <td className='p-2 text-center'>{category_name}</td>
+                  <td className='p-2 text-center'>{slug}</td>
+                  <td className='p-2 text-center'>{createdAt}</td>
+                  <td className='p-2 text-center'>{updatedAt}</td>
                   <td className='p-2 text-center'>
                     <button className= "text-green-600 px-2 py-1  justify">
                       <FaEye />
@@ -185,24 +192,12 @@ export default function Layout() {
                 </tr>
               ))}
             </tbody>
-              )
-            }
           </table>
-
-          {/* Pagination */}
-          <div className="flex justify-center mt-4">
-            <ul className="pagination">
-              <Pagination
-                activePage={activePage}
-                itemsCountPerPage={itemsPerPage}
-                totalItemsCount={filteredBlogPosts.length}
-                pageRangeDisplayed={5}
-                onChange={handlePageChange}
+          <Pagination
                 itemClass="page-item"
                 linkClass="page-link"
+                
               />
-            </ul>
-          </div>
         </div>
       </Sidenav>
     </>
