@@ -8,6 +8,7 @@ import Autosuggest from 'react-autosuggest';
 import Select from 'react-select';
 import Sidenav from '../../../components/sidenav';
 import Pagination from "react-js-pagination";
+import EditForm from '../../../components/EditForm';
 
 const catPosts = [
   { id: 1, parent_id: 1002, category_name: "Entertainment", createdAt: "2024-01-03", updatedAt: "2024-01-04", slug: "entertainment-1" },
@@ -85,77 +86,69 @@ export default function Layout() {
     setSelectedSuggestion(null);
   };
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingPost, setEditingPost] = useState(null);
+
+  const handleEditClick = (post) => {
+    setIsEditing(true);
+    setEditingPost(post);
+  };
+
+  const handleUpdate = (updatedPost) => {
+    setFilteredBlogPosts(
+      filteredBlogPosts.map((post) =>
+        post.id === updatedPost.id ? updatedPost : post
+      )
+    );
+    setIsEditing(false);
+  };
+
   return (
     <>
       <Sidenav>
         <div className='min-h-screen p-4'>
-          {/* Search bars */}
-          <div className='flex '>
-            <div>
-              <Select
-                options={categoryOptions}
-                isClearable
-                value={selectedCategory}
-                onChange={handleCategoryChange}
-                placeholder="All Categories"
-                className="rounded-md w-56 border border-black"
-              />
-              
-            </div>
-            <button onClick={handleSearchInTable} className="bg-orange-500 text-white px-4 py-2 rounded border border-black h-11">
-              <FaSearch />
-            </button>
-
-            <div className="  text-black px-2 py-1 mt-4 flex justify-end w-full">
-              <button className="ml-2 bg-stone-300 rounded-3xl p-2 h-11">
-                <div className="flex">
-                  <IoMdAddCircle style={{ color: 'orange', fontSize: '2em' }} className="" />
-                  <h4>Add New Category</h4>
-                </div>
-              </button>
-            </div>
-          </div>
-
-          {/* Display a table for cat posts */}
-          <table className='table-auto w-full'>
-            <thead>
-              <tr className='bg-gray-200'>
-                <th className='p-2 text-center'>Sr.No.</th>
-                <th className='p-2 text-center'>Category Name</th>
-                <th className='p-2 text-center'>Slug Link</th>
-                <th className='p-2 text-center'>Created At</th>
-                <th className='p-2 text-center'>Updated At</th>
-                <th className='p-2 text-center'>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredBlogPosts.map(({ id, parent_id, category_name, createdAt, updatedAt, slug }) => (
-                <tr key={id} className='border-t'>
-                  <td className='p-2 text-center'>{id}</td>
-                  <td className='p-2 text-center'>{category_name}</td>
-                  <td className='p-2 text-center'>{slug}</td>
-                  <td className='p-2 text-center'>{createdAt}</td>
-                  <td className='p-2 text-center'>{updatedAt}</td>
-                  <td className='p-2 text-center'>
-                    <button className= "text-green-600 px-2 py-1  justify">
-                      <FaEye />
-                    </button>
-                    <button className= "text-blue-600 px-2 py-1  justify">
-                      <FaEdit />
-                    </button>
-                    <button className=" text-red-600 px-2 py-1">
-                      <MdOutlineDeleteForever />
-                    </button>
-                  </td>
+          {isEditing ? (
+            <EditForm post={editingPost} handleUpdate={handleUpdate} />
+          ) : (
+            <table className='table-auto w-full'>
+              <thead>
+                <tr className='bg-gray-200'>
+                  <th className='p-2 text-center'>Sr.No.</th>
+                  <th className='p-2 text-center'>Category Name</th>
+                  <th className='p-2 text-center'>Slug Link</th>
+                  <th className='p-2 text-center'>Created At</th>
+                  <th className='p-2 text-center'>Updated At</th>
+                  <th className='p-2 text-center'>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredBlogPosts.map((post) => (
+                  <tr key={post.id} className='border-t'>
+                    <td className='p-2 text-center'>{post.id}</td>
+                    <td className='p-2 text-center'>{post.category_name}</td>
+                    <td className='p-2 text-center'>{post.slug}</td>
+                    <td className='p-2 text-center'>{post.createdAt}</td>
+                    <td className='p-2 text-center'>{post.updatedAt}</td>
+                    <td className='p-2 text-center'>
+                      <button className="text-green-600 px-2 py-1 justify">
+                        <FaEye />
+                      </button>
+                      <button className="text-blue-600 px-2 py-1 justify" onClick={() => handleEditClick(post)}>
+                        <FaEdit />
+                      </button>
+                      <button className="text-red-600 px-2 py-1">
+                        <MdOutlineDeleteForever />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
           <Pagination
-                itemClass="page-item"
-                linkClass="page-link"
-                
-              />
+            itemClass="page-item"
+            linkClass="page-link"
+          />
         </div>
       </Sidenav>
     </>
