@@ -24,7 +24,7 @@
 .selectField,
 .inputField,
 .textareaField {
-  width: calc(100% - 16px); /* Adjusted the width to leave room for the margin */
+ /* Adjusted the width to leave room for the margin */
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc; /* Add a light border */
@@ -35,6 +35,18 @@
   margin-bottom: 20px; /* Add margin to the bottom */
   margin-left: 10px; /* Add margin to the left */
 }
+
+.inputField
+{
+  width: calc(100% - 16px); 
+}
+
+.textareaField{
+  height: 150px;
+  width: 98%
+}
+
+
 
 
 /* Add placeholder styles for inputs and textarea */
