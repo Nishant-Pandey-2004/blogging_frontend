@@ -1,0 +1,74 @@
+
+  
+  .greenList {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+
+
+/* Add the following styles for category labels */
+.selectField option {
+  background-color: #f0f0f0; /* Set the default background color to gray for category labels */
+}
+
+.selectField option:hover {
+  background-color: #3498db; /* Set the background color to blue when hovering over category labels */
+  color: #fff; /* Set the text color to white when hovering over category labels */
+}
+
+/* BlogForm.module.css */
+
+.selectField,
+.inputField,
+.textareaField {
+ /* Adjusted the width to leave room for the margin */
+ width:50%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Add a light border */
+  border-radius: 4px;
+  margin-bottom: 10px; /* Add some space between inputs */
+  margin-top: 10px; /* Add margin to the top */
+  margin-right: 10px; /* Add margin to the right */
+  margin-bottom: 20px; /* Add margin to the bottom */
+  margin-left: 10px; /* Add margin to the left */
+}
+
+
+
+.textareaField{
+  height: 150px;
+}
+
+
+
+
+/* Add placeholder styles for inputs and textarea */
+.selectField::placeholder,
+.inputField::placeholder,
+.textareaField::placeholder {
+  color: #999;
+}
+
+.selectField:hover,
+.inputField:hover,
+.textareaField:hover {
+  border-color: #3498db; /* Change border color on hover */
+}
+
+
+
+/* Add styling for the Image Upload */
+/* Assuming ImageUpload component renders an input element */
+.ImageUpload input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+
+
+
