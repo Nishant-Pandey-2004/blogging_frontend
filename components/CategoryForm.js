@@ -8,21 +8,18 @@ import ImageUpload from './ImageUpload';
 import styles from './CategoryForm.module.css';
 
 const categories = [
-  { name: 'Sports', subcategories: ['Football', 'Basketball', 'Cricket'] },
-  { name: 'Entertainment', subcategories: ['Movies', 'Music', 'Games'] },
-  { name: 'News', subcategories: ['World News', 'Local News'] },
-  { name: 'Travel', subcategories: ['India', 'Bhutan', 'Dubai'] },
+  { id: 1, name: 'Sports', subcategories: [{ name: 'Football' }, { name: 'Basketball' }, { name: 'Cricket' }] },
+  { id: 2, name: 'Entertainment', subcategories: [{ name: 'Movies' }, { name: 'Music' }, { name: 'Games' }] },
+  { id: 3, name: 'News', subcategories: [{ name: 'World News' }, { name: 'Local News' }] },
+  { id: 4, name: 'Travel', subcategories: [{ name: 'India' }, { name: 'Bhutan' }, { name: 'Dubai' }] },
   // Add more categories as needed
 ];
 
 const CatForm = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-
   const [tags, setTags] = useState('');
-
   const [image, setImage] = useState(null);
   const [selected, setSelected] = useState([]);
 
@@ -33,7 +30,6 @@ const CatForm = () => {
   const handleSubmit = () => {
     // Implement your logic to save the blog post
     console.log('Category:', selectedCategory);
-    console.log('Subcategory:', selectedSubcategory);
     console.log('Title:', title);
     console.log('Description:', description);
     console.log('Tags:', tags);
@@ -41,22 +37,21 @@ const CatForm = () => {
 
     // Reset state after submitting
     setSelectedCategory('');
-    setSelectedSubcategory('');
     setTitle('');
     setDescription('');
-    setContent('');
     setTags('');
     setImage(null);
   };
 
   const handleCategoryChange = (e) => {
-    const selectedValue = e.target.value;
-    const [selectedParentCategory, selectedSubCategory] = selectedValue.split(' - ');
-
-    setSelectedCategory(selectedParentCategory);
-    setSelectedSubcategory(selectedSubCategory);
+    setSelectedCategory(e.target.value);
   };
 
+  const combinedOptions = categories.reduce((options, cat) => {
+    return options.concat(cat.name, ...cat.subcategories.map(subcat => `${cat.name} - ${subcat.name}`));
+  }, []);
+
+  
 
   return (
     <>
@@ -68,34 +63,48 @@ const CatForm = () => {
             <table className='w-full'>
               {/* Category and Title */}
               <tr>
-                <td className='p-4'>
-                  <label htmlFor="category" className={`${styles.requiredField} text-lg`}>
-                    <strong>Parent Category:</strong>
-                  </label>
-                </td>
-                <td>
-                  <select
-                    id="category"
-                    value={`${selectedCategory} - ${selectedSubcategory}`}
-                    onChange={handleCategoryChange}
-                    className={`${styles.selectField} text-lg`}
-                    required
-                  >
-                    <option value="" disabled>------------------------Select the previous parent category--------------------------------</option>
-                    {categories.map((cat) => (
-                      <optgroup label={cat.name} key={cat.name}>
-                        {cat.subcategories.map((subcat) => (
-                          <option key={subcat} value={`${cat.name} - ${subcat}`}>
-                            {subcat}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
-                    <option>Null</option>
-                  </select>
-                  <label className='text-red-400 italic'>(To add a new category which doesn't have any parent choose null)</label>
-                </td>
-              </tr>
+        <td className='p-4'>
+          <label htmlFor="category" className={`${styles.requiredField} text-lg`}>
+            <strong>Category:</strong>
+          </label>
+        </td>
+        <td>
+        <select
+  id="category"
+  value={selectedCategory}
+  onChange={handleCategoryChange}
+  className={`${styles.selectField} text-lg`}
+  required
+>
+  <option value="" disabled>------------------------Select the category or subcategory--------------------------------</option>
+  {categories.map((category) => (
+    <React.Fragment key={category.id}>
+      <option
+        value={category.name}
+        style={{
+          backgroundColor: 'white',
+          fontWeight: 'bold', // Make category names bold
+        }}
+      >
+        {category.name}
+      </option>
+      {category.subcategories.map((subcat, index) => (
+        <option
+          key={`${category.id}-${subcat.name}-${index}`}
+          value={`${category.name} - ${subcat.name}`}
+          style={{
+            backgroundColor: '#f5f5f5',
+            paddingLeft: '20px',
+          }}
+        >
+          {subcat.name}
+        </option>
+      ))}
+    </React.Fragment>
+  ))}
+</select>
+        </td>
+      </tr>
               <tr>
                 <td className='p-4'>
                   <label htmlFor="title" className={`${styles.requiredField} text-lg`}>
