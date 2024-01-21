@@ -1,9 +1,6 @@
 // components/BlogForm.js
 import React, { useState } from 'react';
 import { TagsInput } from "react-tag-input-component";
-
-
-
 import ImageUpload from './ImageUpload';
 import styles from './CategoryForm.module.css';
 
@@ -69,7 +66,6 @@ const categories = [
 ];
 
 
-
 const CatForm = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [title, setTitle] = useState('');
@@ -108,9 +104,9 @@ const CatForm = () => {
         <option
           value={category.id ? category.id : category.name}
           style={{
-            backgroundColor: depth === 0 ? '#f0f0f0' : 'white', // Set blue background for main categories
+            backgroundColor: depth === 0 ? '#f0f0f0' : 'white',
             fontWeight: 'bold',
-            marginLeft: `${depth * 20}px`, // Adjust the spacing as needed
+            marginLeft: `${depth * 20}px`,
           }}
         >
           {depth > 0 ? Array(depth).fill('----').join('') : ''} {category.name}
@@ -119,41 +115,41 @@ const CatForm = () => {
       </React.Fragment>
     ));
   };
-  
+
 
   return (
     <>
-      <h3 className="mx-20 mt-6">Editor  / </h3>
+      <h3 className="mx-20 mt-6 text-sm">Editor  / </h3>
       <hr />
       <div className={`p-4 ${styles.blogFormContainer}`}>
         <div className='flex'>
           <div className='bg-slate-200 rounded-xl p-5 w-full'>
             <table className='w-full'>
-             {/* Category and Title */}
-      <tr>
-        <td className="p-4">
-          <label htmlFor="category" className={`${styles.requiredField} text-lg`}>
-            <strong>Category:</strong>
-          </label>
-        </td>
-        <td>
-          <select
-            id="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className={`${styles.selectField} text-lg`}
-            required
-          >
-            <option value="" disabled>
-              -------------Select the category or subcategory-----------------------------------------------
-            </option>
-            {renderCategoryOptions(categories)}
-          </select>
-        </td>
-      </tr>
+              {/* Category and Title */}
+              <tr>
+                <td className="p-4">
+                  <label htmlFor="category" className={`${styles.requiredField} text-sm`}>
+                    <strong>Category:</strong>
+                  </label>
+                </td>
+                <td>
+                  <select
+                    id="category"
+                    value={selectedCategory}
+                    onChange={handleCategoryChange}
+                    className={`${styles.selectField} text-lg`}
+                    required
+                  >
+                    <option value="" disabled>
+                      -------------Select the category or subcategory-----------------------------------------------
+                    </option>
+                    {renderCategoryOptions(categories)}
+                  </select>
+                </td>
+              </tr>
               <tr>
                 <td className='p-4'>
-                  <label htmlFor="title" className={`${styles.requiredField} text-lg`}>
+                  <label htmlFor="title" className={`${styles.requiredField} text-sm`}>
                     <strong>Sub-Category:</strong>
                   </label>
                 </td>
@@ -163,7 +159,7 @@ const CatForm = () => {
                     id="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className={`${styles.inputField} text-lg`}
+                    className={`${styles.inputField} text-sm`}
                     required
                     placeholder='Enter the new Sub-category'
                   />
@@ -173,7 +169,7 @@ const CatForm = () => {
               {/* Description */}
               <tr>
                 <td className='p-4'>
-                  <label htmlFor="description" className={`${styles.requiredField} text-lg`}>
+                  <label htmlFor="description" className={`${styles.requiredField} text-sm`}>
                     <strong>Description:</strong>
                   </label>
                 </td>
@@ -183,54 +179,52 @@ const CatForm = () => {
                     id="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className={`${styles.textareaField} text-lg`}
+                    className={`${styles.textareaField} text-sm`}
                     required
                     placeholder='Add a brief description....'
                   />
                 </td>
               </tr>
             </table>
-            <div className='flex'>
-              <div className='text-black p-4 mt-4 w-1/2'>
-                <h1 className='mb-2 text-xl'><strong>Tags</strong></h1>
+
+            <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row'>
+              <div className='text-black p-4 mt-4 w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2'>
+                <h1 className='mb-2 text-sm'><strong>Tags</strong></h1>
                 <TagsInput
                   value={selected}
                   onChange={setSelected}
                   name="tags"
                   placeHolder="Enter TAG..."
+                  className="text-sm"
                 />
                 <div className="selected-tags flex">
                   {selected.map((tag, index) => (
-                    <div key={index} className="tag bg-orange-400 text-white text-lg p-0.5 pr-2 pl-2 m-2 mt-0 rounded-full mr-2 mb-2 w-fit">
+                    <div key={index} className="tag bg-orange-400 text-white text-sm p-0.5 pr-2 pl-2 m-2 mt-0 rounded-full mr-2 mb-2 w-fit">
                       {tag}
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className={`p-4`}>
-                <h1 className='text-xl font-bold pl-4'>Upload Images:</h1>
+              <div className='p-4 w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2'>
+                <h1 className='text-sm font-bold pl-4'>Upload Images:</h1>
                 <div className='p-4'>
                   <div className='items-center ml-12  mr-40'>
-                    <b><h4 className='mr-2 text-lg'>Front Image:</h4></b>
-                    <div className=' h-12 align-middle p-2 bg-white shadow'>
+                    <b><h4 className='mr-2 text-sm'>Front Image:</h4></b>
+                    <div className='w-64 h-12 align-middle p-2 bg-white shadow'>
                       <ImageUpload onImageChange={handleImageChange} />
                     </div>
                   </div>
 
                   <div className='items-center ml-12 mr-40'>
-                    <b><h4 className='mr-2 text-lg'>Cover Image:</h4></b>
-                    <div className=' h-12 align-middle p-2 bg-white shadow'>
+                    <b><h4 className='mr-2 text-sm'>Cover Image:</h4></b>
+                    <div className='w-64 h-12 align-middle p-2 bg-white shadow'>
                       <ImageUpload onImageChange={handleImageChange} />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
-
-
           </div></div>
 
 

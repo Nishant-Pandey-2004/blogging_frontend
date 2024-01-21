@@ -147,71 +147,58 @@ const BlogForm = () => {
       <div className={`p-4 ${styles.blogFormContainer}`}>
         <div className='flex'>
           <div className='bg-slate-200 rounded-xl p-5 w-full'>
-            <table className='w-full'>
-               {/* Category and Title */}
-      <tr>
-        <td className="p-4">
-          <label htmlFor="category" className={`${styles.requiredField} text-sm`}>
-            <strong>Category:</strong>
-          </label>
-        </td>
-        <td>
-          <select
-            id="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className={`${styles.selectField} text-lg`}
-            required
-          >
-            <option value="" disabled>
-              ----------------------Select-----------------------
-            </option>
-            {renderCategoryOptions(categories)}
-          </select>
-        </td>
-      
+            <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row'>
+              <div className='w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 p-4'>
+                <label htmlFor="category" className={`${styles.requiredField} text-sm`}>
+                  <strong>Category:</strong>
+                </label>
+                <select
+                  id="category"
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                  className={`${styles.selectField} text-lg w-full`}
+                  required
+                >
+                  <option value="" disabled>
+                    ----------------------Select-----------------------
+                  </option>
+                  {renderCategoryOptions(categories)}
+                </select>
+              </div>
 
-                <td>
-                  <label htmlFor="title" className={`${styles.requiredField} text-sm`}>
-                    <strong>Title:</strong>
-                  </label>
-                </td>
-                <td className='p-4'>
-                  <input
-                    type="text"
-                    id="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className={`${styles.inputField} text-sm`}
-                    required
-                    placeholder='Enter title here'
-                  />
-                </td>
-              </tr>
+              <div className='w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 p-4'>
+                <label htmlFor="title" className={`${styles.requiredField} text-sm`}>
+                  <strong>Title:</strong>
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className={`${styles.inputField} text-sm w-full`}
+                  required
+                  placeholder='Enter title here'
+                />
+              </div>
+            </div>
 
-              {/* Description */}
-              <tr>
-                <td className='p-4'>
-                  <label htmlFor="description" className={`${styles.requiredField} text-sm`}>
-                    <strong>Description:</strong>
-                  </label>
-                </td>
+            <div className='w-full p-4'>
+              <label htmlFor="description" className={`${styles.requiredField} text-sm`}>
+                <strong>Description:</strong>
+              </label>
+              <textarea
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className={`${styles.textareaField} text-sm w-full`}
+                required
+                placeholder='Add a brief description....'
+              />
+            </div>
 
-                <td colSpan={4}>
-                  <textarea
-                    id="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className={`${styles.textareaField} text-sm`}
-                    required
-                    placeholder='Add a brief description....'
-                  />
-                </td>
-              </tr>
-            </table>
-            <div className='flex'>
+            <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row'>
               {/* Tags  */}
-              <div className='text-black p-4 mt-4 w-1/2'>
+              <div className='text-black p-4 mt-4 w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2'>
                 <h1 className='mb-2 text-sm'><strong>Tags</strong></h1>
                 <TagsInput
                   value={selected}
@@ -219,7 +206,7 @@ const BlogForm = () => {
                   name="tags"
                   placeHolder="Enter TAG..."
                 />
-                <div className="selected-tags flex">
+                <div className="selected-tags flex flex-wrap">
                   {selected.map((tag, index) => (
                     <div key={index} className="tag bg-orange-400 text-white text-sm p-0.5 pr-2 pl-2 m-2 mt-0 rounded-full mr-2 mb-2 w-fit">
                       {tag}
@@ -228,7 +215,7 @@ const BlogForm = () => {
                 </div>
               </div>
 
-              <div className='w-1/2'>
+              <div className='w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2'>
                 <div className="mt-4 p-4">
                   <label className={`${styles.requiredField} text-sm`}>
                     <strong>SEO SETTINGS:</strong>
@@ -265,7 +252,7 @@ const BlogForm = () => {
                             id="metaDescription"
                             value={metaDescription}
                             onChange={(e) => setMetaDescription(e.target.value)}
-                            className={`w-full ${styles.textareaField} text-sm`}
+                            className={`w-full ${styles.metatextareaField} text-sm`}
                             required
                           />
                         </td>
@@ -295,17 +282,17 @@ const BlogForm = () => {
             </div>
 
             <h1 className='text-sm font-bold pl-4'>Upload Images:</h1>
-            <div className='flex p-4'>
-              <div className='flex items-center w-1/2 ml-12'>
+            <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row p-4'>
+              <div className='flex items-center w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 ml-12 mb-4 md:mb-0 lg:mb-0 xl:mb-0'>
                 <b><h4 className='mr-2 text-sm'>Thumbnail Image:</h4></b>
-                <div className='w-1/2 h-12 align-middle p-2 bg-white shadow'>
+                <div className='w-64 h-12 align-middle p-2 bg-white shadow'>
                   <ImageUpload onImageChange={handleImageChange} />
                 </div>
               </div>
 
-              <div className='flex items-center w-1/2 ml-12'>
+              <div className='flex items-center w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 ml-12'>
                 <b><h4 className='mr-2 text-sm'>Banner Image:</h4></b>
-                <div className='w-1/2 h-12 align-middle p-2 bg-white shadow'>
+                <div className='w-64 h-12 align-middle p-2 bg-white shadow'>
                   <ImageUpload onImageChange={handleImageChange} />
                 </div>
               </div>
@@ -314,7 +301,7 @@ const BlogForm = () => {
         </div>
 
         <h2 className="text-2xl font-bold text-center p-8 pb-0">Write your Blogs here</h2>
-        <div className="ml-40 mr-40 mt-10">
+        <div className="w-full sm:w-full md:w-auto lg:w-auto xl:w-auto ml-0 sm:ml-0 md:ml-40 lg:ml-40 xl:ml-40 mr-0 sm:mr-0 md:mr-40 lg:mr-40 xl:mr-40 mt-10">
           <QuillEditor value={content} onChange={handleEditorChange} />
         </div>
 

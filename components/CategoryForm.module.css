@@ -10,8 +10,7 @@
 .selectField,
 .inputField,
 .textareaField {
- /* Adjusted the width to leave room for the margin */
- width:50%;
+  width: 50%;
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc; /* Add a light border */
@@ -21,12 +20,16 @@
   margin-right: 10px; /* Add margin to the right */
   margin-bottom: 20px; /* Add margin to the bottom */
   margin-left: 10px; /* Add margin to the left */
+
+  /* Add media queries for tablets and mobiles */
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 
-
 .textareaField{
-  height: 150px;
+  height: 80px;
 }
 
 

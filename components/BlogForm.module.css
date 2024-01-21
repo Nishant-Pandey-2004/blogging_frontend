@@ -37,11 +37,15 @@
 }
 
 .textareaField{
-  height: 150px;
+  height: 80px;
   width: 98%
 }
 
-
+.metatextareaField{
+  height: 40px;
+  width: 94%;
+  margin-left: 12px;
+}
 
 
 /* Add placeholder styles for inputs and textarea */
