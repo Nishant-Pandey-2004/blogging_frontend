@@ -9,12 +9,66 @@ import ImageUpload from './ImageUpload';
 import styles from './BlogForm.module.css';
 
 const categories = [
-  { name: 'Sports', subcategories: ['Football', 'Basketball', 'Cricket'] },
-  { name: 'Entertainment', subcategories: ['Movies', 'Music', 'Games'] },
-  { name: 'News', subcategories: ['World News', 'Local News'] },
-  { name: 'Travel', subcategories: ['India', 'Bhutan', 'Dubai'] },
-  // Add more categories as needed
+  {
+    id: 1,
+    name: 'Technology',
+    subcategories: [
+      {
+        name: 'Programming',
+        subcategories: [
+          {
+            name: 'JavaScript',
+          },
+          {
+            name: 'Python',
+          },
+          {
+            name: 'Java',
+          },
+        ],
+      },
+      {
+        name: 'Gadgets',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Science',
+    subcategories: [
+      {
+        name: 'Physics',
+      },
+      {
+        name: 'Biology',
+      },
+      {
+        name: 'Chemistry',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Travel',
+    subcategories: [
+      {
+        name: 'Adventure',
+      },
+      {
+        name: 'Cultural',
+        subcategories: [
+          {
+            name: 'Historical',
+          },
+          {
+            name: 'Festivals',
+          },
+        ],
+      },
+    ],
+  },
 ];
+
 
 const BlogForm = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -63,50 +117,62 @@ const BlogForm = () => {
     setImage(null);
   };
 
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
 
-
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const renderCategoryOptions = (categories, depth = 0) => {
+    return categories.map((category) => (
+      <React.Fragment key={category.id || category.name}>
+        <option
+          value={category.id ? category.id : category.name}
+          style={{
+            backgroundColor: depth === 0 ? '#f0f0f0' : 'white',
+            fontWeight: 'bold',
+            marginLeft: `${depth * 20}px`,
+          }}
+          disabled={depth === 0} // Disable main category
+        >
+          {depth > 0 ? Array(depth).fill('----').join('') : ''} {category.name}
+        </option>
+        {category.subcategories && category.subcategories.length > 0 && renderCategoryOptions(category.subcategories, depth + 1)}
+      </React.Fragment>
+    ));
   };
 
   return (
     <>
-      <h3 className="mx-20 mt-6">Editor  / </h3>
+      <h3 className="mx-20 mt-6 text-sm">Editor  / </h3>
       <hr />
       <div className={`p-4 ${styles.blogFormContainer}`}>
         <div className='flex'>
           <div className='bg-slate-200 rounded-xl p-5 w-full'>
             <table className='w-full'>
-              {/* Category and Title */}
-              <tr>
-                <td className='p-4'>
-                  <label htmlFor="category" className={`${styles.requiredField} text-lg`}>
-                    <strong>Category:</strong>
-                  </label>
-                </td>
-                <td>
-                  <select
-                    id="category"
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className={`${styles.selectField} text-lg`}
-                    required
-                  >
-                    <option value="" disabled>----------------------------SELECT--------------------------------</option>
-                    {categories.map((cat) => (
-                      <optgroup label={cat.name} key={cat.name}>
-                        {cat.subcategories.map((subcat) => (
-                          <option key={subcat} value={`${cat.name} - ${subcat}`}>
-                            {subcat}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
-                  </select>
-                </td>
+               {/* Category and Title */}
+      <tr>
+        <td className="p-4">
+          <label htmlFor="category" className={`${styles.requiredField} text-sm`}>
+            <strong>Category:</strong>
+          </label>
+        </td>
+        <td>
+          <select
+            id="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className={`${styles.selectField} text-lg`}
+            required
+          >
+            <option value="" disabled>
+              ----------------------Select-----------------------
+            </option>
+            {renderCategoryOptions(categories)}
+          </select>
+        </td>
+      
 
                 <td>
-                  <label htmlFor="title" className={`${styles.requiredField} text-lg`}>
+                  <label htmlFor="title" className={`${styles.requiredField} text-sm`}>
                     <strong>Title:</strong>
                   </label>
                 </td>
@@ -116,7 +182,7 @@ const BlogForm = () => {
                     id="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className={`${styles.inputField} text-lg`}
+                    className={`${styles.inputField} text-sm`}
                     required
                     placeholder='Enter title here'
                   />
@@ -126,7 +192,7 @@ const BlogForm = () => {
               {/* Description */}
               <tr>
                 <td className='p-4'>
-                  <label htmlFor="description" className={`${styles.requiredField} text-lg`}>
+                  <label htmlFor="description" className={`${styles.requiredField} text-sm`}>
                     <strong>Description:</strong>
                   </label>
                 </td>
@@ -136,7 +202,7 @@ const BlogForm = () => {
                     id="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className={`${styles.textareaField} text-lg`}
+                    className={`${styles.textareaField} text-sm`}
                     required
                     placeholder='Add a brief description....'
                   />
@@ -146,7 +212,7 @@ const BlogForm = () => {
             <div className='flex'>
               {/* Tags  */}
               <div className='text-black p-4 mt-4 w-1/2'>
-                <h1 className='mb-2 text-xl'><strong>Tags</strong></h1>
+                <h1 className='mb-2 text-sm'><strong>Tags</strong></h1>
                 <TagsInput
                   value={selected}
                   onChange={setSelected}
@@ -155,7 +221,7 @@ const BlogForm = () => {
                 />
                 <div className="selected-tags flex">
                   {selected.map((tag, index) => (
-                    <div key={index} className="tag bg-orange-400 text-white text-lg p-0.5 pr-2 pl-2 m-2 mt-0 rounded-full mr-2 mb-2 w-fit">
+                    <div key={index} className="tag bg-orange-400 text-white text-sm p-0.5 pr-2 pl-2 m-2 mt-0 rounded-full mr-2 mb-2 w-fit">
                       {tag}
                     </div>
                   ))}
@@ -164,7 +230,7 @@ const BlogForm = () => {
 
               <div className='w-1/2'>
                 <div className="mt-4 p-4">
-                  <label className={`${styles.requiredField} text-lg`}>
+                  <label className={`${styles.requiredField} text-sm`}>
                     <strong>SEO SETTINGS:</strong>
                   </label>
 
@@ -182,7 +248,7 @@ const BlogForm = () => {
                             id="metaTitle"
                             value={metaTitle}
                             onChange={(e) => setMetaTitle(e.target.value)}
-                            className={`w-full ${styles.inputField} text-lg`}
+                            className={`w-full ${styles.inputField} text-sm`}
                             required
                           />
                         </td>
@@ -199,7 +265,7 @@ const BlogForm = () => {
                             id="metaDescription"
                             value={metaDescription}
                             onChange={(e) => setMetaDescription(e.target.value)}
-                            className={`w-full ${styles.textareaField} text-lg`}
+                            className={`w-full ${styles.textareaField} text-sm`}
                             required
                           />
                         </td>
@@ -217,7 +283,7 @@ const BlogForm = () => {
                             id="metaKeyword"
                             value={metaKeyword}
                             onChange={(e) => setMetaKeyword(e.target.value)}
-                            className={`w-full ${styles.inputField} text-lg`}
+                            className={`w-full ${styles.inputField} text-sm`}
                             required
                           />
                         </td>
@@ -228,17 +294,17 @@ const BlogForm = () => {
               </div>
             </div>
 
-            <h1 className='text-xl font-bold pl-4'>Upload Images:</h1>
+            <h1 className='text-sm font-bold pl-4'>Upload Images:</h1>
             <div className='flex p-4'>
               <div className='flex items-center w-1/2 ml-12'>
-                <b><h4 className='mr-2 text-lg'>Thumbnail Image:</h4></b>
+                <b><h4 className='mr-2 text-sm'>Thumbnail Image:</h4></b>
                 <div className='w-1/2 h-12 align-middle p-2 bg-white shadow'>
                   <ImageUpload onImageChange={handleImageChange} />
                 </div>
               </div>
 
               <div className='flex items-center w-1/2 ml-12'>
-                <b><h4 className='mr-2 text-lg'>Banner Image:</h4></b>
+                <b><h4 className='mr-2 text-sm'>Banner Image:</h4></b>
                 <div className='w-1/2 h-12 align-middle p-2 bg-white shadow'>
                   <ImageUpload onImageChange={handleImageChange} />
                 </div>
@@ -247,22 +313,16 @@ const BlogForm = () => {
           </div>
         </div>
 
-
-
-
-
         <h2 className="text-2xl font-bold text-center p-8 pb-0">Write your Blogs here</h2>
         <div className="ml-40 mr-40 mt-10">
           <QuillEditor value={content} onChange={handleEditorChange} />
         </div>
-
 
         <br /><br />
         {/* Submit Button */}
         <button className={`bg-green-500 font-bold text-white px-4 py-2 mt-4 rounded-lg flex items-center mx-auto`} onClick={handleSubmit}>
           CREATE
         </button>
-
       </div>
     </>
   );

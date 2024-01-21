@@ -8,12 +8,67 @@ import ImageUpload from './ImageUpload';
 import styles from './CategoryForm.module.css';
 
 const categories = [
-  { id: 1, name: 'Sports', subcategories: [{ name: 'Football' }, { name: 'Basketball' }, { name: 'Cricket' }] },
-  { id: 2, name: 'Entertainment', subcategories: [{ name: 'Movies' }, { name: 'Music' }, { name: 'Games' }] },
-  { id: 3, name: 'News', subcategories: [{ name: 'World News' }, { name: 'Local News' }] },
-  { id: 4, name: 'Travel', subcategories: [{ name: 'India' }, { name: 'Bhutan' }, { name: 'Dubai' }] },
-  // Add more categories as needed
+  {
+    id: 1,
+    name: 'Technology',
+    subcategories: [
+      {
+        name: 'Programming',
+        subcategories: [
+          {
+            name: 'JavaScript',
+          },
+          {
+            name: 'Python',
+          },
+          {
+            name: 'Java',
+          },
+        ],
+      },
+      {
+        name: 'Gadgets',
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Science',
+    subcategories: [
+      {
+        name: 'Physics',
+      },
+      {
+        name: 'Biology',
+      },
+      {
+        name: 'Chemistry',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Travel',
+    subcategories: [
+      {
+        name: 'Adventure',
+      },
+      {
+        name: 'Cultural',
+        subcategories: [
+          {
+            name: 'Historical',
+          },
+          {
+            name: 'Festivals',
+          },
+        ],
+      },
+    ],
+  },
 ];
+
+
 
 const CatForm = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -47,10 +102,23 @@ const CatForm = () => {
     setSelectedCategory(e.target.value);
   };
 
-  const combinedOptions = categories.reduce((options, cat) => {
-    return options.concat(cat.name, ...cat.subcategories.map(subcat => `${cat.name} - ${subcat.name}`));
-  }, []);
-
+  const renderCategoryOptions = (categories, depth = 0) => {
+    return categories.map((category) => (
+      <React.Fragment key={category.id || category.name}>
+        <option
+          value={category.id ? category.id : category.name}
+          style={{
+            backgroundColor: depth === 0 ? '#f0f0f0' : 'white', // Set blue background for main categories
+            fontWeight: 'bold',
+            marginLeft: `${depth * 20}px`, // Adjust the spacing as needed
+          }}
+        >
+          {depth > 0 ? Array(depth).fill('----').join('') : ''} {category.name}
+        </option>
+        {category.subcategories && category.subcategories.length > 0 && renderCategoryOptions(category.subcategories, depth + 1)}
+      </React.Fragment>
+    ));
+  };
   
 
   return (
@@ -61,54 +129,32 @@ const CatForm = () => {
         <div className='flex'>
           <div className='bg-slate-200 rounded-xl p-5 w-full'>
             <table className='w-full'>
-              {/* Category and Title */}
-              <tr>
-        <td className='p-4'>
+             {/* Category and Title */}
+      <tr>
+        <td className="p-4">
           <label htmlFor="category" className={`${styles.requiredField} text-lg`}>
             <strong>Category:</strong>
           </label>
         </td>
         <td>
-        <select
-  id="category"
-  value={selectedCategory}
-  onChange={handleCategoryChange}
-  className={`${styles.selectField} text-lg`}
-  required
->
-  <option value="" disabled>------------------------Select the category or subcategory--------------------------------</option>
-  {categories.map((category) => (
-    <React.Fragment key={category.id}>
-      <option
-        value={category.name}
-        style={{
-          backgroundColor: 'white',
-          fontWeight: 'bold', // Make category names bold
-        }}
-      >
-        {category.name}
-      </option>
-      {category.subcategories.map((subcat, index) => (
-        <option
-          key={`${category.id}-${subcat.name}-${index}`}
-          value={`${category.name} - ${subcat.name}`}
-          style={{
-            backgroundColor: '#f5f5f5',
-            paddingLeft: '20px',
-          }}
-        >
-          {subcat.name}
-        </option>
-      ))}
-    </React.Fragment>
-  ))}
-</select>
+          <select
+            id="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className={`${styles.selectField} text-lg`}
+            required
+          >
+            <option value="" disabled>
+              -------------Select the category or subcategory-----------------------------------------------
+            </option>
+            {renderCategoryOptions(categories)}
+          </select>
         </td>
       </tr>
               <tr>
                 <td className='p-4'>
                   <label htmlFor="title" className={`${styles.requiredField} text-lg`}>
-                    <strong>Sub-Category</strong>
+                    <strong>Sub-Category:</strong>
                   </label>
                 </td>
                 <td >
