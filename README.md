@@ -272,11 +272,13 @@ Table name: Blog history
 
 2\. Use Case
 
-![https://lh7-us.googleusercontent.com/4n9EzFUJzl3uSX4GDTtEtIjjui8hlxwi4YyAJMOPIgcChQkn4439BnM7T7Lza5h3HYRecfCqUtHqENZU_Iq3_jqsHvj_MlSs0_eDcwxHiYM1KHsUttkOMVzK8oIX9WMiQ5S-PYZHK_QzqiTs1o5MNYg](Aspose.Words.785f199e-3190-4101-b8c3-1fdc113ca3a9.001.png)
+![image](https://github.com/Nishant-Pandey-2004/blogging_frontend/assets/113779980/c388722c-615f-4a70-b31e-084660601ee2)
+
 
 Fig 2.1 Admin Use Case
 
-![https://lh7-us.googleusercontent.com/UBU1Zmo-icmgv6jQxAWYLU3xV5CWvup0c11NQn611ajEOxgD19SUlxwuuZ2VYYCti9_XQFGFxk9Q6GgN5TVHVeYdjNUWa1vAm-lo0013Fcy3HAxgdM8_xDi-DU0dbSOl70bzV2GMsQUsHq69ImAxuoQ](Aspose.Words.785f199e-3190-4101-b8c3-1fdc113ca3a9.002.png)
+![image](https://github.com/Nishant-Pandey-2004/blogging_frontend/assets/113779980/a9e69c52-9187-4eb5-b8cb-462af7231fd0)
+
 
 Fig 2.2 User Use Case
 
