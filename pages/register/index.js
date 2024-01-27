@@ -7,7 +7,7 @@ const register = () => {
     return <>
     <div className='overflow-hidden'>
         <div className='flex justify-center'>
-            <Image src={'/logo.png'} width={500} height={500}/>
+            <Image src={'/logo.png'} width={500} height={100}/>
         </div>
         <div className=''><Register/></div>
         </div>
