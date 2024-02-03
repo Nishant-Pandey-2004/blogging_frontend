@@ -7,7 +7,7 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import Pagination from "react-js-pagination";
 import Autosuggest from 'react-autosuggest';
 import Select from 'react-select';
-import Sidenav from '../../../components/sidenav';
+import Sidenav from '../../../components/Sidenav';
 
 const catPosts = [
   { id: 1, parent_id: 1002, category_name: "Entertainment", createdAt: "2024-01-03", updatedAt: "2024-01-04", slug: "entertainment-1" },
@@ -99,8 +99,11 @@ export default function Layout() {
 
   return (
     <>
-      <Sidenav>
-        <div className='min-h-screen p-4'>
+    <div className='flex'>
+      <div className='w-[18vw]'>
+      <Sidenav/>
+      </div>
+        <div className='w-[90vw] min-h-screen p-4 pt-20'>
           {/* Search bars */}
           <div className='flex '>
             <div>
@@ -181,7 +184,7 @@ export default function Layout() {
             </ul>
           </div>
         </div>
-      </Sidenav>
+        </div>
     </>
   );
 }
